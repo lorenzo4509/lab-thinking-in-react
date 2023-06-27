@@ -1,9 +1,11 @@
-
-
 import React from 'react';
 import ProductRow from './ProductRow';
 
-function ProductTable({ products }) {
+function ProductTable({ products, showOnlyInStock }) {
+  const filteredProducts = showOnlyInStock
+    ? products.filter((product) => product.inStock)
+    : products;
+
   return (
     <table>
       <thead>
@@ -13,7 +15,7 @@ function ProductTable({ products }) {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductRow key={product.id} product={product} />
         ))}
       </tbody>

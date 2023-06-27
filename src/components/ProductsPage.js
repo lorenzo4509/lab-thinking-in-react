@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import jsonData from '../data.json';
+import jsonData from './../data.json';
 import SearchBar from './SearchBar';
 import ProductTable from './ProductTable';
 
@@ -12,17 +12,11 @@ function ProductsPage() {
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (showOnlyInStock) {
-      const filteredProductsInStock = filteredProducts.filter((product) => product.inStock);
-      setProducts(filteredProductsInStock);
-    } else {
-      setProducts(filteredProducts);
-    }
+    setProducts(filteredProducts);
   };
 
   const handleCheckboxChange = (event) => {
     setShowOnlyInStock(event.target.checked);
-    handleSearch(event.target.value);
   };
 
   return (
@@ -33,7 +27,7 @@ function ProductsPage() {
         <input type="checkbox" onChange={handleCheckboxChange} />
         Only show products in stock
       </label>
-      <ProductTable products={products} />
+      <ProductTable products={products} showOnlyInStock={showOnlyInStock} />
     </div>
   );
 }
